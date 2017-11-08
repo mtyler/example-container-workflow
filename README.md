@@ -15,15 +15,16 @@ Enablement instructions for creating a reference container lifecycle workflow th
 1. log into GCP and create a container cluster
 2. log into docker hub
 
-# TODO
+# Step 1 - Manually push a single container to Kubernetes
 
-- local Dockerfile workflow
-* cd teir_web
+* clone this repo
+* cd example-container-workflow/teir_web
 * docker build -t teir_web .
-* docker run --name some-nginx -d -p 8080:80 [docker_org]/teir_web
-* http://localhost:8080
-* docker login [YAK: create dockerhub account]
-* docker push [docker_org]/teir_web
+* Test to ensure it works
+  docker run --name some-nginx -d -p 8080:80 [docker_org]/teir_web
+  http://localhost:8080
+* docker login [You will need a dockerhub account](cloud.docker.com)
+* docker push <docker_org>/teir_web
 
 - initialize GCP/k8s
 * install google-cloud-sdk
@@ -31,8 +32,11 @@ Enablement instructions for creating a reference container lifecycle workflow th
 * gcloud init
 * create k8s cluster
 * connect to the cluster (see connection string in web ui)
+* kubectl get nodes
+* kubectl run web --image <docker_org>/teir_web
+* kubectl expose deployment web --type=LoadBalancer --name=web --port=80
+* kubectl get services
 
-
-* kubectl expose deployment pig-farm --type=LoadBalancer --name=pig-farm --port=80
+# TODO
 
 - publish Dockerfile
