@@ -1,4 +1,10 @@
 desc "simple rake task"
 task :test do
-  # Your code goes here
+  puts "logging contents of index.html"
+  puts ".............................."
+  File.open("./teir_web/static-html-directory/index.html", "r") do |file|
+    file.each_line do |line|
+      puts line
+    end
+  end
 end
