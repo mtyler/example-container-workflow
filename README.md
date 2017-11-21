@@ -52,7 +52,6 @@ There should now be a static web page exposed on the IP above.  Yay!  Obviously,
 * publish container image `docker push <docker_org>/teir_web`
 * get deployment name `kubectl get deployments` will return NAME
 * get history `kubectl rollout history deployment/<NAME>`
-* . . . . increase replicas to 3 `kubectl scale deployment <NAME> --replicas=3`
 * deploy container `kubectl set image deployment/web web=<docker_org>/teir_web:1.0.1`
 
 ### Step 2 - Conclusion
@@ -61,9 +60,12 @@ Now we can make changes, but all the other things still need to be addressed
 
 # Step 3 - Introduce source control and pipeline
 
-* create travis-ci.com account link it to github.com account & this repo
-* add DOCKER_PASSWORD and DOCKER_USERNAME to travis environment values
-
+* create travis-ci.com account.  If you haven't already done so, consider forking this repo in github. Link travis-ci to github and tell travis to monitor the fork you created.
+* Through the travis web interface, add `DOCKER_PASSWORD` and `DOCKER_USERNAME` to travis environment values
+* Unless it's been refactored, change .travis.yml to use your <docker_org>
+* edit `teir_web/static-html-directory/index.html` to have a noticeable change
+* commit and push changes `git commit -am "first pipeline change" && git push`
+* TODO get kube cluster to pull new image: manually this can be done with `kubectl set image deployment/web web=<docker_org>/teir_web:latest`
 
 
 # Step 4 - Manage multiple tiers
