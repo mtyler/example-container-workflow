@@ -1,0 +1,4 @@
+desc "simple rake task"
+task :test do
+  # Your code goes here
+end
