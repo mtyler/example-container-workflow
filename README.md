@@ -52,7 +52,7 @@ There should now be a static web page exposed on the IP above.  Yay!  Obviously,
 * publish container image `docker push <docker_org>/teir_web`
 * get deployment name `kubectl get deployments` will return NAME
 * get history `kubectl rollout history deployment/<NAME>`
-* ## increase replicas to 3 `kubectl scale deployment <NAME> --replicas=3`
+* . . . . increase replicas to 3 `kubectl scale deployment <NAME> --replicas=3`
 * deploy container `kubectl set image deployment/web web=<docker_org>/teir_web:1.0.1`
 
 ### Step 2 - Conclusion

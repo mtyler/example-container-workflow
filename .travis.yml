@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build --no-cache -t mtyler/teir_web:latest ./teir_web/.
+  - docker run --name web -d -p 8080:80 mtyler/teir_web
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+    docker push mtyler/teir_web;
+    fi
